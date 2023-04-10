@@ -1,0 +1,23 @@
+body {
+    background-color: white;
+}
+
+.hidden {
+    display: none;
+}
+
+.taskList {
+    margin: 0 auto;
+    width: 1200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.taskCard {
+    border: 1px solid #989a9b;
+    flex-basis: 40.0%;
+    margin: 10px;
+    height: 70px;
+}

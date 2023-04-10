@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\RegistrationController;
+use App\Http\Controllers\TasksController;
+use App\Http\Controllers\GenerateContentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,14 +20,19 @@ Route::get('/', function () {
     return redirect(\route('login'));
 });
 Route::middleware('guest')->group(function () {
-
     Route::get('registration', [RegistrationController::class, 'index']);
     Route::post('registration', [RegistrationController::class, 'store'])->name('registration');
-
-
 });
-Route::get('/logout', function () {
 
+
+Route::middleware('auth')->group(function () {
+    Route::get('tasks/list', [TasksController::class, 'userList'])->name('userList');
+    Route::get('tasks/list/user={idd}', [TasksController::class, 'taskList'])->name('taskList');
+});
+
+Route::get('generate', [GenerateContentController::class, 'generate']);
+
+Route::get('/logout', function () {
     \Illuminate\Support\Facades\Auth::guard('web')->logout();
     return redirect(route('registration'));
 })->name('logout');

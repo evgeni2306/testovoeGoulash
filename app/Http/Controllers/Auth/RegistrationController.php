@@ -35,7 +35,7 @@ class RegistrationController extends Controller
         $user = User::query()->create($fields);
         if ($user) {
             Auth::login($user);
-            dd(Auth::id());
+            return redirect(route('userList'));
         }
     }
 }

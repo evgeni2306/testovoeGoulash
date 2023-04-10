@@ -5,6 +5,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -16,4 +17,18 @@ class User extends Authenticatable
         'age',
         'password',
     ];
+    protected $hidden = [
+        'password'
+    ];
+
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = Hash::make($password);
+    }
+
+    static function getUsersList()
+    {
+        $users =  User::query()->select('id', 'name')->get();
+        return $users->sortBy('name');
+    }
 }
