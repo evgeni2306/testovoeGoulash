@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(\route('login'));
 });
+Route::middleware('guest')->group(function () {
+
+    Route::get('registration', [RegistrationController::class, 'index']);
+    Route::post('registration', [RegistrationController::class, 'store'])->name('registration');
+
+
+});
+Route::get('/logout', function () {
+
+    \Illuminate\Support\Facades\Auth::guard('web')->logout();
+    return redirect(route('registration'));
+})->name('logout');
