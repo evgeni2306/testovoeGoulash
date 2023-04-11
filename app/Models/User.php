@@ -28,7 +28,7 @@ class User extends Authenticatable
 
     static function getUsersList()
     {
-        $users =  User::query()->select('id', 'name')->get();
+        $users = User::query()->select('id', 'name')->get();
         return $users->sortBy('name');
     }
 }

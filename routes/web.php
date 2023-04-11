@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegistrationController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\GenerateContentController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,8 @@ Route::get('/', function () {
 Route::middleware('guest')->group(function () {
     Route::get('registration', [RegistrationController::class, 'index']);
     Route::post('registration', [RegistrationController::class, 'store'])->name('registration');
+    Route::get('login', [LoginController::class, 'index']);
+    Route::post('login', [LoginController::class, 'login'])->name('login');
 });
 
 

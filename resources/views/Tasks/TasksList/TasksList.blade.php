@@ -40,18 +40,18 @@
 
     function taskCardBuilder(task) {
         const route = "{{route('tasks')}}"
-        const routePersonal = "{{route('tasks')}}"+'='+task.id;
-        const routeDelete="{{route('tasks')}}"+'/delete='+task.id;
-        const routeUpdate="{{route('tasks')}}"+'/update='+task.id;
+        const routePersonal = "{{route('tasks')}}" + '=' + task.id;
+        const routeDelete = "{{route('tasks')}}" + '/delete=' + task.id;
+        const routeUpdate = "{{route('tasks')}}" + '/update=' + task.id;
         const element =
-           ' <div class="taskNameAndDate">'+
-                '<div class="taskName">'+task.name+'</div>'+
-                '<div class="taskDate">'+task.created_at+'</div>'+
-           ' </div>'+
+            ' <div class="taskNameAndDate">' +
+            '<div class="taskName">' + task.name + '</div>' +
+            '<div class="taskDate">' + task.created_at + '</div>' +
+            ' </div>' +
             '<div class="taskButtons">' +
-            '<button><a href="'+ routePersonal+'">Смотреть</a></button>' +
-            '<button><a href="'+ routeUpdate+'">Редактировать</a></button>' +
-            '<button><a href="'+ routeDelete+'">Удалить</a></button>' +
+            '<button><a href="' + routePersonal + '">Смотреть</a></button>' +
+            '<button><a href="' + routeUpdate + '">Редактировать</a></button>' +
+            '<button><a href="' + routeDelete + '">Удалить</a></button>' +
             '</div>'
         return element
     }

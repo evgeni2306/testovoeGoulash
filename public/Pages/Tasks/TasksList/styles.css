@@ -30,13 +30,14 @@ body {
     justify-content: center;
 }
 
-.taskNameAndDate{
+.taskNameAndDate {
     display: flex;
     flex-direction: column;
     width: 85%;
     height: 100%;
     background-color: #f5f4f4;
 }
+
 .form__error {
     padding: 11px 15px;
     color: #f8222f;

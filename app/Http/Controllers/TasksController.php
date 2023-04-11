@@ -24,7 +24,7 @@ class TasksController extends Controller
         return response()->json($tasks, 200, ['Content-Type' => 'string']);
     }
 
-    public function form($task = null):View
+    public function form($task = null): View
     {
         $users = User::getUsersList();
         return view('Tasks.TasksForm.TasksForm', ['users' => $users, 'task' => $task]);

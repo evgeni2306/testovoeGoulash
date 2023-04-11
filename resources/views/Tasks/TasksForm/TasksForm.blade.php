@@ -46,7 +46,8 @@
                 <option value="Не сделано">Не сделано</option>
             </select>
             <select class="form__input" id="user_id" required name="user_id">
-                <option value="{{$task->user_id}}" disabled selected style="display:none;">Выберите Пользователя</option>
+                <option value="{{$task->user_id}}" disabled selected style="display:none;">Выберите Пользователя
+                </option>
                 @foreach( $users as $user)
                     <option value="{{$user->id}}">{{$user->name}}</option>
                 @endforeach
