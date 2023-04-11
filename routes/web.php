@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect(\route('login'));
+    return redirect(\route('registration'));
 });
 Route::middleware('guest')->group(function () {
     Route::get('registration', [RegistrationController::class, 'index']);

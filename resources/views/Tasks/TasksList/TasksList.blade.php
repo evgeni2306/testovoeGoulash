@@ -15,7 +15,17 @@
 
 
 <div class="taskList" id="taskList">
-    {{--    <div class="taskCard">prjvet1</div>--}}
+    <div class="taskCard">
+        <div class="taskNameAndDate">
+            <div class="taskName">prjvet1</div>
+            <div class="taskDate">data</div>
+        </div>
+        <div class="taskButtons">
+            <button><a>Смотреть</a></button>
+            <button><a>Редактировать</a></button>
+            <button><a>Удалить</a></button>
+        </div>
+    </div>
 </div>
 
 
@@ -32,14 +42,23 @@
 
             taskCard = document.createElement('div');
             taskCard.className = "taskCard";
-            taskCard.innerHTML = taskCardBuilder(tasks[i].name);
+            taskCard.innerHTML = taskCardBuilder(tasks[i].name,tasks[i].created_at);
             taskList.append(taskCard);
         }
     }
 
 
-    function taskCardBuilder(name) {
-        const element = '<div> ' + name + ' </div>'
+    function taskCardBuilder(name,date) {
+        const element =
+           ' <div class="taskNameAndDate">'+
+                '<div class="taskName">'+name+'</div>'+
+                '<div class="taskDate">'+date+'</div>'+
+           ' </div>'+
+            '<div class="taskButtons">' +
+            '<button><a>Смотреть</a></button>' +
+            '<button><a>Редактировать</a></button>' +
+            '<button><a>Удалить</a></button>' +
+            '</div>'
         return element
     }
 

@@ -17,7 +17,8 @@ class Task extends Model
         'user_id'
     ];
 
-    static function getTasksByUserId(int $userId): array
+    static function getTasksByUserId(int $userId): array|\Illuminate\Database\Eloquent\Collection
+
     {
         $tasks = self::query()->where('user_id', '=', $userId)->get();
         return $tasks->sortBy('created_at');

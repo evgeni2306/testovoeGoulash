@@ -20,4 +20,20 @@ body {
     flex-basis: 40.0%;
     margin: 10px;
     height: 70px;
+    display: flex;
+    flex-direction: row;
+}
+
+.taskButtons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.taskNameAndDate{
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    height: 100%;
+    background-color: #f5f4f4;
 }
