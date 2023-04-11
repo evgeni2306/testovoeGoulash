@@ -23,7 +23,7 @@
             </div>
             <div class="fieldBLock">
                 <div class="fieldName">Пользователь:</div>
-                <div class="informationField">{{$task->user_id}}</div>
+                <div class="informationField">{{$task->userName}}</div>
             </div>
             <div class="fieldBLock">
                 <div class="fieldName">Дата создания:</div>
@@ -33,8 +33,8 @@
     </div>
     <div class="taskButtons">
         <div class="buttons">
-            <button><a>Редактировать</a></button>
-            <button><a>Удалить</a></button>
+            <button><a class="link" href="{{route('taskDelete',$task->id)}}">Удалить</a></button>
+            <button><a class="link" href="{{route('taskIndexUpdate',$task->id)}}">Редактироваать</a></button>
         </div>
 
     </div>

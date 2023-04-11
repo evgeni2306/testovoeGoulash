@@ -26,11 +26,16 @@ Route::middleware('guest')->group(function () {
 
 
 Route::middleware('auth')->group(function () {
+    Route::get('tasks', [TasksController::class, 'userList'])->name('tasks');
+
     Route::get('tasks/list', [TasksController::class, 'userList'])->name('userList');
     Route::get('tasks/list/user={idd}', [TasksController::class, 'taskList'])->name('taskList');
-    Route::get('tasks/create', [TasksController::class, 'indexCreate'])->name('taskIndexCreate');
+    Route::get('tasks/create', [TasksController::class, 'store'])->name('taskIndexCreate');
     Route::post('tasks/create', [TasksController::class, 'store'])->name('taskCreate');
     Route::get('tasks={idd}', [TasksController::class, 'indexPersonal'])->name('taskIndexPersonal');
+    Route::get('tasks/update={idd}', [TasksController::class, 'update'])->name('taskIndexUpdate');
+    Route::post('tasks/update={idd}', [TasksController::class, 'update'])->name('taskUpdate');
+    Route::get('tasks/delete={idd}', [TasksController::class, 'delete'])->name('taskDelete');
 });
 
 Route::get('generate', [GenerateContentController::class, 'generate']);

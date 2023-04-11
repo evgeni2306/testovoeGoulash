@@ -15,17 +15,7 @@
 
 
 <div class="taskList" id="taskList">
-    <div class="taskCard">
-        <div class="taskNameAndDate">
-            <div class="taskName">prjvet1</div>
-            <div class="taskDate">data</div>
-        </div>
-        <div class="taskButtons">
-            <button><a>Смотреть</a></button>
-            <button><a>Редактировать</a></button>
-            <button><a>Удалить</a></button>
-        </div>
-    </div>
+
 </div>
 
 
@@ -42,22 +32,26 @@
 
             taskCard = document.createElement('div');
             taskCard.className = "taskCard";
-            taskCard.innerHTML = taskCardBuilder(tasks[i].name,tasks[i].created_at);
+            taskCard.innerHTML = taskCardBuilder(tasks[i]);
             taskList.append(taskCard);
         }
     }
 
 
-    function taskCardBuilder(name,date) {
+    function taskCardBuilder(task) {
+        const route = "{{route('tasks')}}"
+        const routePersonal = "{{route('tasks')}}"+'='+task.id;
+        const routeDelete="{{route('tasks')}}"+'/delete='+task.id;
+        const routeUpdate="{{route('tasks')}}"+'/update='+task.id;
         const element =
            ' <div class="taskNameAndDate">'+
-                '<div class="taskName">'+name+'</div>'+
-                '<div class="taskDate">'+date+'</div>'+
+                '<div class="taskName">'+task.name+'</div>'+
+                '<div class="taskDate">'+task.created_at+'</div>'+
            ' </div>'+
             '<div class="taskButtons">' +
-            '<button><a>Смотреть</a></button>' +
-            '<button><a>Редактировать</a></button>' +
-            '<button><a>Удалить</a></button>' +
+            '<button><a href="'+ routePersonal+'">Смотреть</a></button>' +
+            '<button><a href="'+ routeUpdate+'">Редактировать</a></button>' +
+            '<button><a href="'+ routeDelete+'">Удалить</a></button>' +
             '</div>'
         return element
     }

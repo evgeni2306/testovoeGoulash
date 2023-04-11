@@ -24,14 +24,17 @@ class TasksController extends Controller
         return response()->json($tasks, 200, ['Content-Type' => 'string']);
     }
 
-    public function indexCreate(): View
+    public function form($task = null):View
     {
         $users = User::getUsersList();
-        return view('Tasks.TasksForm.TasksForm', ['users' => $users]);
+        return view('Tasks.TasksForm.TasksForm', ['users' => $users, 'task' => $task]);
     }
 
-    public function store(Request $request): \Illuminate\Http\RedirectResponse
+    public function store(Request $request)
     {
+        if ($request->method() === "GET") {
+            return $this->form();
+        }
         $fields = $request->all();
         $validator = Validator::make($fields, [
             'name' => 'required|string',
@@ -49,12 +52,47 @@ class TasksController extends Controller
         return redirect(route('taskIndexPersonal', $task->id));
     }
 
-    public function indexPersonal(int $taskId)
+    public function update(Request $request, int $taskId): \Illuminate\Http\RedirectResponse|View
+    {
+        $task = Task::query()->find($taskId);
+        if ($request->method() === "GET") {
+            if ($task !== null) {
+                return $this->form($task);
+            }
+            return redirect(route('userList'));
+        }
+        $fields = $request->all();
+        $fields['taskId'] = $taskId;
+        $validator = Validator::make($fields, [
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'status' => 'required|string|ends_with:Сделано,В работе,Не сделано',
+            'user_id' => 'required|integer|exists:users,id',
+            'taskId' => 'required|integer|exists:tasks,id'
+        ]);
+        $task->update($fields);
+        return redirect(route('userList'));
+    }
+
+
+    public function indexPersonal(int $taskId): \Illuminate\Http\RedirectResponse|View
     {
         $task = Task::query()->find($taskId);
         if ($task !== null) {
+            $task->userName = User::query()->find($task->user_id)->name;
             return view('Tasks.TasksPersonal.TasksPersonal', ['task' => $task]);
         }
         return redirect(route('userList'));
     }
+
+    public function delete(int $taskId): \Illuminate\Http\RedirectResponse
+    {
+        $task = Task::query()->find($taskId);
+        if ($task !== null) {
+            $task->delete();
+        }
+        return redirect(route('userList'));
+    }
+
+
 }
